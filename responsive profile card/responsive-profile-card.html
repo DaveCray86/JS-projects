@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charste="utf-8">
+        <title>Profile Card</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700'>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    
+        <style type="text/css">
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+            }
+            body{
+                background-image: url("./image/magneto.jpg");
+                background-size: cover;
+                width: 100%;
+                height: 100vh;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                position: relative;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                font-family: 'open-sans' sans-serif;
+                font-size: 100%;
+            }
+
+            .customSlider {
+                opacity: 0;
+                display: none;
+            }
+            .customSlider + label {
+                position: relative;
+                top: 35%;
+                left: 15%;
+                cursor: pointer;
+            }
+            .customSlider + label:before, .customSlider + label:after {
+                background: #fff;
+                position: absolute;
+                content: '';
+            }
+            .customSlider + label:before {
+                top: -90px;
+                left: -60px;
+                width: 80px;
+                height: 40px;
+                background: #ccc;
+                border-radius: 20px;
+                -webkit-transition: background .75s;
+                transition: background .75s;
+            }
+            .customSlider + label:after {
+                height: 34 px;
+                width: 34px;
+                top: -84px;
+                left: -55px;
+                border-radius: 50%;
+                -webkit-transition: all .5s;
+                transition: all .5s;
+            }
+            .customSlider:checked + label:after {
+                height: 34 px;
+                width: 34px;
+                top: -87px;
+                left: -19px;
+                border-radius: 50%;
+            }
+            .customSlider:checked ~ .wrapper {
+                color:#fff;
+                background: #31394d;
+                transition: background .6s ease;
+                -webkit-transition: background .6s ease;
+            }
+            .customSlider:checked ~ .wapper .top-icon i {
+                color: #fff;
+            }
+            .customSlider:checked ~ .wapper .profile .name {
+                color: #fdfeff;
+            }    
+            .customSlider:checked ~ .wapper .profile .title {
+                color: #7c8097;
+            }    
+            .customSlider:checked ~ .wapper .profile .description {
+                color: #fff;
+            }    
+            .customSlider:checked ~ .wapper .icon p {
+                color: #666b7d;
+            }    
+            .wrapper {
+                width: 320px;
+                height: 540px;
+                background: #fdfeff;
+                transition: background .6s ease;
+                -webkit-transition: background .6s ease;
+                box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+                -webkit-box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+                border-radius: 10px;
+            }
+            .wrapper .top-icons i{
+                color: #080911;
+            }
+            .wrapper .top-icons i:nth-of-type(1){
+                float: left;
+            }
+            .wrapper .top-icons i:nth-of-type(2){
+                float: right;
+            }
+            .wrapper .top-icons i:nth-of-type(3){
+                float: right;
+                padding-right: .8em;
+            }
+            .wrapper .profile{
+                margin-top: 2.2em;
+                position: relative;
+            }
+            .wrapper .profile:after{
+                width: 100%;
+                height: 1px;
+                content: '';
+                display: block;
+                margin-top: 1.3em;
+                background: #e9eff6;
+            }
+            .wrapper .profile .check i{
+                color: #fff;
+                width: 20px;
+                height: 20px;
+                font-size: 12px;
+                line-height: 20px;
+                text-align: center;
+                border-radius: 100%;
+                background: -webkit-gradient(linear, left top, right bottom, from(#e100ff), to (#ff48a0));
+                background: linear-gradient(to bottom right, #c90a6d, #ff48a0);
+            }
+            .wrapper .profile .thumbnail {
+                width: 124px;
+                height: 124px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 1.5em;
+                border-radius: 100%;
+                -webkit-box-shadow: 0 13px 26px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 13px 26px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.2);
+            }
+            .wrapper .profile .name {
+                color: #f52667;
+                font-size: 24px;
+                font-weight: 600;
+                text-align: center;
+            }
+            .wrapper .profile .title {
+                color: brown;
+                font-size: .75em;
+                font-weight: 400;
+                text-align: center;
+                padding-top: .5em;
+                padding-bottom: .7em;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+            }
+            .wrapper .profile .description {
+                color: #00a4a2;
+                font-size: 14px;
+                font-weight: 300;
+                text-align: center;
+                margin-bottom: 1.3em;
+            }
+            .wrapper .profile .btn {
+                color: #fff;
+                width: 130px;
+                height: 42px;
+                outline: none;
+                border: none;
+                display: block;
+                cursor: pointer;
+                font-weight: 300;
+                margin-right: auto;
+                margin-left: auto;
+                border-radius: 70px;
+                -webkit-box-shadow: 0 13px 26px rgba(0, 0, 0, 0.16),0 3px  6px rgba(0, 0, 0, 0.16);
+                box-shadow: 0 13px 26px rgba(0, 0, 0, 0.16),0 3px  6px rgba(0, 0, 0, 0.16);
+                background: -webkit-gradient(linear, left top, right bottom, from(#c90a6d), to(#ff48a0));
+                background: linear-gradient(to bottom right, #c90a6d, #ff48a0);
+            }
+            .wrapper .social-icons {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                margin-top: 1.2em;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                justify-content: center;
+            }
+            .wrapper .social-icons .icon {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                flex-direction: column;
+            }
+            .wrapper .social-icons .icon a{
+                color: #fff;
+                height: 60px;
+                width: 60px;
+                font-size: 28px;
+                line-height: 60px;
+                text-align: center;
+                border-radius: 30px;
+                -webkit-box-shadow: 0 13px 26px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 13px 26px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.2);
+            }
+            .wrapper .social-icons icon:nth-of-type(1) a {
+                background: -webkit-gradient(linear, left top, right bottom, from(#c90a6d), to (#ff48a0));
+                background: linear-gradient(to bottom right, #c90a6d, #ff48a0);
+            }
+            .wrapper .social-icons icon:nth-of-type(2) a {
+                background: -webkit-gradient(linear, left top, right bottom, from(#5e5aec), to (#5e5aec));
+                background: linear-gradient(to bottom right, #5e5aec, #3f9efc);
+            }
+            .wrapper .social-icons icon:nth-of-type(3) a {
+                background: -webkit-gradient(linear, left top, right bottom, from(#6452e9), to (#639ff9));
+                background: linear-gradient(to bottom right, #6452e9, #639ff9);
+            }
+            .wrapper .social-icons icon h4 {
+                color: #080911;
+                font-size: 1em;
+                margin-top: 1.3em;
+                margin-bottom: .2em;
+            }
+            .wrapper .social-icons .icon p{
+                color: #666b7d;
+                font-size: 12px;
+            }
+            .concept {
+                position: absolute;
+                bottom: 25px;
+                color: f00;
+                font-size: .9em;
+                font-weight: 800; 
+            }
+            .concept a{
+                color: #ac1966;
+                text-decoration: none;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <input id="slider" class="customSlider" type="checkbox">
+        <label for="slider"></label>
+        <div class="wrapper">
+            <div class="top-icons">
+                <i class="fas fa-long-arrow-alt-left"></i>
+                <i class="fas fa-ellipsis-v"></i>
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="profile">
+                <img src="./image/oh_yeah-Yeah.jpg" class="thumbnail">
+                <div class="check"><i class="far fa-check-circle"></i>
+                <h3 class="name">Hackers Hub</h3>
+                <p class="description">All ur base are belong to us!</p>
+                <button type="button" class="btn">Hire Me</button>
+                </div>
+
+                <div class="social-icons">
+                    <div class="icon">
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <h4>Own</h4>
+                        <p>hacking-group</p>
+                    </div>
+                    <div class="icon">
+                        <a href="#"><i class="fab fa-facebook-square"></i></a>
+                        <h4>6.2k</h4>
+                        <p>likes</p>
+                    </div>
+
+                    <div class="icon">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <h4>12.4k</h4>
+                        <p>followers</p>
+                    </div>
+                </div>
+            </div>
+        <div class="concept">Concept by
+            <a href="#"><i class="fab fa-dribble"></i>M4GN3T0</a>
+        </div>
+        </div>
+    </body>
+</html>
